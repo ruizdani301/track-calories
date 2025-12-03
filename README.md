@@ -1,6 +1,6 @@
 # Contador de calorias
 
-![alt text](image.png)
+![This is an alt text.](/calorie-tracker-api-context/image/image.png "This is a sample image.")
 
 
 Aplicación desarrollada con React + TypeScript, utilizando Context API y useReducer para la gestión de estado global.
