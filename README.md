@@ -1,27 +1,85 @@
-# React + TypeScript + Vite
+# Contador de calorias
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![alt text](image.png)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Aplicación desarrollada con React + TypeScript, utilizando Context API y useReducer para la gestión de estado global.
+Permite registrar actividades, calcular calorías y reiniciar la aplicación cuando existan datos guardados.
+La interfaz está diseñada con TailwindCSS.
 
-## Expanding the ESLint configuration
+## Tecnologías utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+React
 
-- Configure the top-level `parserOptions` property like this:
+TypeScript
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+Context API
+
+useReducer
+
+TailwindCSS
+
+LocalStorage para persistencia de datos
+
+## Descripción del funcionamiento
+
+El componente principal App:
+
+Consume el estado global mediante el hook useActivity().
+
+Guarda automáticamente las actividades en localStorage usando useEffect.
+
+Calcula si es posible reiniciar la app usando useMemo.
+
+Renderiza los siguientes componentes:
+
+Form → formulario para agregar actividades.
+
+CalorieTracker → resumen de calorías consumidas y quemadas.
+
+ActivityList → listado de actividades registradas.
+
+El botón "Reiniciar App" se habilita solo si existen actividades en el estado global.
+
+## Estructura principal de componentes
+
+```
+src/
+│
+├── components/
+│   ├── Form.tsx
+│   ├── ActivityList.tsx
+│   └── CalorieTracker.tsx
+│
+├── hooks/
+│   └── useActivity.ts
+│
+├── context/
+│   └── ActivityContext.tsx   # Context + useReducer
+│
+└── App.tsx
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Estado global
+
+El proyecto utiliza:
+
+Context Provider para exponer estado y dispatch.
+
+useReducer para manejar acciones como:
+
+agregar actividad
+
+eliminar actividad
+
+filtrar
+
+reiniciar aplicación
+
+El estado completo queda disponible en todos los componentes a través de:
+
+```
+const { state, dispatch } = useActivity();
+
